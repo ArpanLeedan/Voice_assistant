@@ -51,9 +51,9 @@ if __name__ == '__main__':
 
         if 'wikipedia' in text:
             respond('Searching Wikipedia')
-            text = text.replace("wikipedia", "")
-            text = ''.join(c for c in text if c.isalpha())
-            results = wikipedia.summary(text, sentences=3)
+            dru = text.replace("wikipedia", "")
+            dru = ''.join(c for c in dru if c.isalpha())
+            results = wikipedia.summary(dru, sentences=3)
             respond("According to Wikipedia")
             respond(results)
 
@@ -62,8 +62,7 @@ if __name__ == '__main__':
             respond(f"the time is {strTime}")
 
         if 'search' in text:
-            text = text.replace("search", "")
-            text=''.join(c for c in text if c.isalpha())
+            dru = text.replace("search", "")
             try:
                 from googlesearch import search
             except ImportError:
@@ -71,7 +70,7 @@ if __name__ == '__main__':
 
             respond("Below are the list of websites available")
 
-            for j in search(text, tld="co.in", num=10, stop=10, pause=2):
+            for j in search(dru, tld="co.in", num=10, stop=10, pause=2):
                 print(j)
 
         if "calculate" in text:
@@ -101,5 +100,10 @@ if __name__ == '__main__':
             respond("Opening youtube")
             webbrowser.open_new("youtube.com")
 
-        if ("youtube") not in text and ("spotify") not in text and ("google") not in text and ("search") not in text and ("calculate") not in text and ("time") not in text and ("wikipedia") not in text and ("joke") not in text and ("who am i")not in text and(text!=""):
-            respond("Application not available")
+        if text != "":
+            c=0
+            for i in ("time", "youtube", "wikipedia", "who am i", "spotify", "google", "joke", "calculate", "search"):
+                if i not in text:
+                    c=c+1
+            if(c==9):
+                respond("Application not available")
